@@ -45,10 +45,33 @@ app.get('/profile', (req, res) => {
       followings: 1,
     },
     heatmap: dummyHeatmap.data,
-    feed: dummyFeed,
+    feed: dummyFeed.data,
     challenge: dummyChallenge.data
   }
 
   res.send(response)
 
+})
+
+app.get('/grow', (req, res) => {
+  res.send(dummyHeatmap)
+})
+
+app.get('/main/challenge', (req, res) => {
+  const mainChallenge = []
+  const chs = [...dummyChallenge.data]
+  while (mainChallenge.length < 4) {
+    mainChallenge.push(chs.splice(Math.floor(Math.random() * chs.length), 1)[0])
+  }
+
+  mainChallenge.map((it) => {
+    return {
+      'challengeId': it.challenge_id,
+      challengeTitle: it.challenge_title,
+      categoryName: it.category_name,
+      challengeUserCount: it.participants,
+      imageUrl: it.challenge_image
+    }
+  })
+  res.send(mainChallenge)
 })
