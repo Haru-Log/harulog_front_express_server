@@ -46,7 +46,7 @@ app.get('/profile', (req, res) => {
       followings: 1,
     },
     heatmap: dummyHeatmap.data,
-    feed: dummyFeed,
+    feed: dummyFeed.data,
     challenge: dummyChallengeDetail.data
   }
 
@@ -54,12 +54,36 @@ app.get('/profile', (req, res) => {
 
 })
 
+app.get('/grow', (req, res) => {
+  res.send(dummyHeatmap)
+})
+
+app.get('/main/challenge', (req, res) => {
+  const mainChallenge = []
+  const chs = [...dummyChallenge.data]
+  while (mainChallenge.length < 4) {
+    mainChallenge.push(chs.splice(Math.floor(Math.random() * chs.length), 1)[0])
+  }
+
+  mainChallenge.map((it) => {
+    return {
+      'challengeId': it.challenge_id,
+      challengeTitle: it.challenge_title,
+      categoryName: it.category_name,
+      challengeUserCount: it.participants,
+      imageUrl: it.challenge_image
+    }
+  })
+  res.send(mainChallenge)
+})
+
+
 app.get('/challenge', (req, res) => {
   const response = {
-    status : 200,
-    code : "COM-000",
-    message : "OK",
-    data : dummyChallengeAll
+    status: 200,
+    code: "COM-000",
+    message: "OK",
+    data: dummyChallengeAll
   }
   res.send(response)
 })
@@ -67,10 +91,10 @@ app.get('/challenge', (req, res) => {
 app.get('/challenge:id', (req, res) => {
   const challengeId = req.params.id
   const response = {
-    status : 200,
-    code : "COM-000",
-    message : "OK",
-    data : dummyChallengeDetail.find(x => x.challengeId === challengeId)
+    status: 200,
+    code: "COM-000",
+    message: "OK",
+    data: dummyChallengeDetail.find(x => x.challengeId === challengeId)
   }
   res.send(response)
 })
