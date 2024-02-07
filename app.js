@@ -60,7 +60,7 @@ app.get('/grow', (req, res) => {
 
 app.get('/main/challenge', (req, res) => {
   const mainChallenge = []
-  const chs = [...dummyChallenge.data]
+  const chs = [...dummyChallengeDetail.data]
   while (mainChallenge.length < 4) {
     mainChallenge.push(chs.splice(Math.floor(Math.random() * chs.length), 1)[0])
   }
