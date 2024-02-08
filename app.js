@@ -13,10 +13,12 @@ const corsOption = {
 }
 app.use(cors(corsOption));
 
-const dummyFeed = require('./post_sample.js')
-const dummyHeatmap = require('./heatmap_sample.js')
-const dummyChallengeDetail = require('./challengeSample_detail.js')
-const dummyChallengeAll = require('./challengeSample_all.js')
+const dummyFeed = require('./dummyData/post_sample.js')
+const dummyHeatmap = require('./dummyData/heatmap_sample.js').data
+const dummyChallengeDetail = require('./dummyData/challengeSample_detail.js')
+const dummyChallengeAll = require('./dummyData/challengeSample_all.js')
+const dummyGoal = require('./dummyData/dummyGoal.js').data
+const dummyUpdateGoal = require('./dummyData/dummyUserGoal.js').data
 
 app.listen(port, () => {
   console.log(`서버가 http://localhost:${port} 에서 실행 중입니다.`);
@@ -24,6 +26,9 @@ app.listen(port, () => {
 
 });
 
+/*
+ * Feed
+ */
 
 app.get('/feed', (req, res) => {
   res.send(dummyFeed)
@@ -33,6 +38,10 @@ app.get('/feed/:id', (req, res) => {
   const id = req.params.id
   res.send(dummyFeed.find(x => parseInt(x.id) === parseInt(id)))
 })
+
+/*
+ * User
+ */
 
 app.get('/profile', (req, res) => {
 
@@ -45,7 +54,7 @@ app.get('/profile', (req, res) => {
       followers: 1,
       followings: 1,
     },
-    heatmap: dummyHeatmap.data,
+    heatmap: dummyHeatmap,
     feed: dummyFeed.data,
     challenge: dummyChallengeDetail.data
   }
@@ -54,9 +63,26 @@ app.get('/profile', (req, res) => {
 
 })
 
+/*
+ * Grow
+ */
+
 app.get('/grow', (req, res) => {
   res.send(dummyHeatmap)
 })
+
+app.get('/grow/daily', (req, res) => {
+  res.send(dummyGoal)
+})
+
+app.get('/user-goal', (req, res) => {
+  res.send(dummyUpdateGoal)
+})
+
+
+/*
+ * Challenge
+ */
 
 app.get('/main/challenge', (req, res) => {
   const mainChallenge = []
