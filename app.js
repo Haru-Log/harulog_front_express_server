@@ -114,13 +114,13 @@ app.get('/challenge', (req, res) => {
   res.send(response)
 })
 
-app.get('/challenge:id', (req, res) => {
+app.get('/challenge/:id', (req, res) => {
   const challengeId = req.params.id
   const response = {
     status: 200,
     code: "COM-000",
     message: "OK",
-    data: dummyChallengeDetail.find(x => x.challengeId === challengeId)
+    data: dummyChallengeDetail.filter(x => x.challengeId === parseInt(challengeId))[0]
   }
   res.send(response)
 })

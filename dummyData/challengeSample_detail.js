@@ -1,4 +1,4 @@
-const dummyChallenge = [
+const dummyChallengeDetail = [
   {
     challengeId: 1,
     challengeTitle: '데일리 오운완',
@@ -14,8 +14,10 @@ const dummyChallenge = [
       {
         userId: 1,
         nickname: 'local',
-        imageUrl: null,
-        role: 'LEADER'
+        imageUrl: 'https://avatars.githubusercontent.com/u/64907633?v=4',
+        role: 'LEADER',
+        status: "(10/10)",
+        dailyAchievement: true,
       }
     ]
   },
@@ -34,8 +36,10 @@ const dummyChallenge = [
       {
         userId: 1,
         nickname: 'local',
-        imageUrl: null,
-        role: 'LEADER'
+        imageUrl: 'https://avatars.githubusercontent.com/u/64907633?v=4',
+        role: 'LEADER',
+        status: "(10/10)",
+        dailyAchievement: true,
       }
     ]
   },
@@ -43,7 +47,7 @@ const dummyChallenge = [
     challengeId: 3,
     challengeTitle: '한 달에 한 권씩',
     challengeContent: '매주 1권씩 책 읽기',
-    challengeGoal: 40,
+    challengeGoal: 450,
     submission: '독서 일지 및 인상 깊은 구절 공유',
     imageUrl: 'https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     startDate: '2024-03-01T00:00:00',
@@ -54,8 +58,10 @@ const dummyChallenge = [
       {
         userId: 1,
         nickname: 'local',
-        imageUrl: null,
-        role: 'LEADER'
+        imageUrl: 'https://avatars.githubusercontent.com/u/64907633?v=4',
+        role: 'LEADER',
+        status: "(10/10)",
+        dailyAchievement: true,
       }
     ]
   },
@@ -74,8 +80,10 @@ const dummyChallenge = [
       {
         userId: 1,
         nickname: 'local',
-        imageUrl: null,
-        role: 'LEADER'
+        imageUrl: 'https://avatars.githubusercontent.com/u/64907633?v=4',
+        role: 'LEADER',
+        status: "(10/10)",
+        dailyAchievement: true,
       }
     ]
   },
@@ -94,8 +102,10 @@ const dummyChallenge = [
       {
         userId: 1,
         nickname: 'local',
-        imageUrl: null,
-        role: 'LEADER'
+        imageUrl: 'https://avatars.githubusercontent.com/u/64907633?v=4',
+        role: 'LEADER',
+        status: "(10/10)",
+        dailyAchievement: true,
       }
     ]
   },
@@ -114,8 +124,10 @@ const dummyChallenge = [
       {
         userId: 1,
         nickname: 'local',
-        imageUrl: null,
-        role: 'LEADER'
+        imageUrl: 'https://avatars.githubusercontent.com/u/64907633?v=4',
+        role: 'LEADER',
+        status: "(10/10)",
+        dailyAchievement: true,
       }
     ]
   },
@@ -134,8 +146,10 @@ const dummyChallenge = [
       {
         userId: 1,
         nickname: 'local',
-        imageUrl: null,
-        role: 'LEADER'
+        imageUrl: 'https://avatars.githubusercontent.com/u/64907633?v=4',
+        role: 'LEADER',
+        status: "(10/10)",
+        dailyAchievement: true,
       }
     ]
   },
@@ -154,8 +168,10 @@ const dummyChallenge = [
       {
         userId: 1,
         nickname: 'local',
-        imageUrl: null,
-        role: 'LEADER'
+        imageUrl: 'https://avatars.githubusercontent.com/u/64907633?v=4',
+        role: 'LEADER',
+        status: "(10/10)",
+        dailyAchievement: true,
       }
     ]
   },
@@ -174,8 +190,10 @@ const dummyChallenge = [
       {
         userId: 1,
         nickname: 'local',
-        imageUrl: null,
-        role: 'LEADER'
+        imageUrl: 'https://avatars.githubusercontent.com/u/64907633?v=4',
+        role: 'LEADER',
+        status: "(10/10)",
+        dailyAchievement: true,
       }
     ]
   },
@@ -194,11 +212,13 @@ const dummyChallenge = [
       {
         userId: 1,
         nickname: 'local',
-        imageUrl: null,
-        role: 'LEADER'
+        imageUrl: 'https://avatars.githubusercontent.com/u/64907633?v=4',
+        role: 'LEADER',
+        status: "(10/10)",
+        dailyAchievement: true,
       }
     ]
   }
 ];
 
-exports.data = dummyChallenge;
+module.exports = dummyChallengeDetail;
