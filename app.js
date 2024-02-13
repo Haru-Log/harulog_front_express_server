@@ -4,21 +4,21 @@ const app = express();
 require('dotenv').config();
 const port = process.env.REACT_APP_PORT;
 app.use(express.json());
-app.use(cors({ credentials: true, origin: `${process.env.REACT_APP_SERVER_URL}` }));
+// app.use(cors({ credentials: true, origin: `${process.env.REACT_APP_SERVER_URL}` }));
 
 const corsOption = {
   origin: [`${process.env.REACT_APP_LOCAL_URL}`],
   credentials: true,
-  methods: ["GET", "DELETE", "PATCH"],
+  methods: ["GET", "DELETE", "PATCH", "PUT"],
 }
 app.use(cors(corsOption));
 
-const dummyFeed = require('./dummyData/post_sample.js')
+const dummyFeed = require('./dummyData/post_sample.js').data
 const dummyHeatmap = require('./dummyData/heatmap_sample.js').data
 const dummyChallengeDetail = require('./dummyData/challengeSample_detail.js')
 const dummyChallengeAll = require('./dummyData/challengeSample_all.js')
-const dummyGoal = require('./dummyData/dummyGoal.js').data
-const dummyUpdateGoal = require('./dummyData/dummyUserGoal.js').data
+let dummyGoal = require('./dummyData/dummyGoal.js').data
+let dummyUpdateGoal = require('./dummyData/dummyUserGoal.js').data
 
 app.listen(port, () => {
   console.log(`서버가 http://localhost:${port} 에서 실행 중입니다.`);
@@ -31,12 +31,23 @@ app.listen(port, () => {
  */
 
 app.get('/feed', (req, res) => {
-  res.send(dummyFeed)
+  res.send({
+    status: 200,
+    code: "common-000",
+    message: "OK",
+    data: dummyFeed
+  })
 })
 
 app.get('/feed/:id', (req, res) => {
   const id = req.params.id
-  res.send(dummyFeed.find(x => parseInt(x.id) === parseInt(id)))
+  const response = {
+    status: 200,
+    code: 'common-000',
+    message: "OK",
+    data: dummyFeed.find(x => parseInt(x.post_id) === parseInt(id))
+  }
+  res.send(response)
 })
 
 /*
@@ -55,7 +66,7 @@ app.get('/profile', (req, res) => {
       followings: 1,
     },
     heatmap: dummyHeatmap,
-    feed: dummyFeed.data,
+    feed: dummyFeed,
     challenge: dummyChallengeDetail.data
   }
 
@@ -72,14 +83,99 @@ app.get('/grow', (req, res) => {
 })
 
 app.get('/grow/daily', (req, res) => {
+  console.log('dummyGoal', dummyGoal);
   res.send(dummyGoal)
 })
 
 app.get('/user-goal', (req, res) => {
+  console.log('dummyUpdateGoal', dummyUpdateGoal);
   res.send(dummyUpdateGoal)
 })
 
+app.put('/user-goal/update', (req, res) => {
+  const data = req.body.updateGoalsList
 
+  const tempDummyGoal = [
+    {
+      "categoryName": '기상',
+      "userGoal": data.find(x => x.categoryName === '기상').goal,
+      "archievement": 22,
+      "updatedAt": '2024-01-01'
+    },
+    {
+      "categoryName": '운동',
+      "userGoal": data.find(x => x.categoryName === '운동').goal,
+      "archievement": 80,
+      "updatedAt": '2024-01-01'
+    },
+    {
+      "categoryName": '공부',
+      "userGoal": data.find(x => x.categoryName === '공부').goal,
+      "archievement": 50,
+      "updatedAt": '2024-01-01'
+    },
+    {
+      "categoryName": '독서',
+      "userGoal": data.find(x => x.categoryName === '독서').goal,
+      "archievement": 22,
+      "updatedAt": '2024-01-01'
+    },
+  ]
+
+  dummyGoal = dummyGoal.map((x, idx) => {
+    if (x.userGoal !== tempDummyGoal[idx].userGoal) {
+      return {
+        ...x,
+        updatedAt: new Date()
+      }
+    } else {
+      return x
+    }
+  })
+
+  const tempDummyUpdateGoal = [{
+    "categoryName": "운동",
+    "goal": data.find(x => x.categoryName === '운동').goal
+    , "updatedAt": '2024-01-01'
+
+  },
+  {
+    "categoryName": "기상",
+    "goal": data.find(x => x.categoryName === '기상').goal
+    , "updatedAt": '2024-01-01'
+
+  },
+  {
+    "categoryName": "공부",
+    "goal": data.find(x => x.categoryName === '공부').goal
+    , "updatedAt": '2024-01-01'
+
+  },
+  {
+    "categoryName": "독서",
+    "goal": data.find(x => x.categoryName === '독서').goal
+    , "updatedAt": '2024-01-01'
+  }]
+
+  dummyUpdateGoal = dummyUpdateGoal.map((x, idx) => {
+    if (x.goal !== tempDummyUpdateGoal[idx].goal) {
+      return {
+        ...x,
+        updatedAt: new Date()
+      }
+    } else {
+      return x
+    }
+  })
+
+  res.send({
+    status: 200,
+    code: "COM-000",
+    message: "OK",
+    activityTimeVer: dummyGoal,
+    data: dummyUpdateGoal
+  })
+})
 /*
  * Challenge
  */
