@@ -182,7 +182,7 @@ app.put('/user-goal/update', (req, res) => {
 
 app.get('/main/challenge', (req, res) => {
   const mainChallenge = []
-  const chs = [...dummyChallengeDetail.data]
+  const chs = [...dummyChallengeDetail]
   while (mainChallenge.length < 4) {
     mainChallenge.push(chs.splice(Math.floor(Math.random() * chs.length), 1)[0])
   }
@@ -196,7 +196,9 @@ app.get('/main/challenge', (req, res) => {
       imageUrl: it.challenge_image
     }
   })
-  res.send(mainChallenge)
+  res.send({
+    data: mainChallenge
+  })
 })
 
 
