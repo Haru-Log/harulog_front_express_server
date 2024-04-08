@@ -1,9 +1,9 @@
 {
-  "name": "TS_Express",
+  "name": "harulog_front_express_server",
   "version": "1.0.0",
-  "description": "ExpressJS Template Via Typescript",
+  "description": "harulog_front_express_server",
   "main": "index.js",
-  "repository": "https://github.com/SWARVY/TS_Express.git",
+  "repository": "https://github.com/Haru-Log/harulog_front_express_server",
   "author": "SWARVY <swarvy0826@naver.com>",
   "license": "MIT",
   "devDependencies": {
