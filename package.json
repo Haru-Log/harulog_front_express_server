@@ -26,7 +26,7 @@
   "scripts": {
     "start": "npm run build:live",
     "build": "tsc -p .",
-    "dev": "nodemon --watch src --exec 'npx' 'ts-node' src/index.ts"
+    "dev": "nodemon --watch src --exec npx ts-node src/index.ts"
   },
   "dependencies": {
     "body-parser": "^1.20.2",
